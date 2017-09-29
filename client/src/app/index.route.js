@@ -230,6 +230,15 @@
                 resolve: {
                     resolveTool: resolveTool
                 }
+            })
+            .state('geneDashboard', {
+                url: '/geneDashboard/{datasource}',
+                template: '<os-genedashboard>',
+                datasource: true,
+                help: "/",
+                resolve: {
+                    resolveTool: resolveTool
+                }
             });
 
         $urlRouterProvider.otherwise('/');
