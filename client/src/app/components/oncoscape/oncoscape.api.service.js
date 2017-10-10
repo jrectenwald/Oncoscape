@@ -19,6 +19,7 @@
         var onGenesetChange = new signals.Signal();
         var onGenesetsChange = new signals.Signal();
         var onPatientColorChange = new signals.Signal();
+        var onshowGenesetImportChange= new signals.Signal();
 
         // Resize
         angular.element($window).bind('resize', _.debounce(onResize.dispatch, 900));
@@ -436,6 +437,7 @@
         var _cohortToolInfo = { 'numSamples': 500, 'numPatients': 500 };
         var _cohortDatasetInfo = { 'numSamples': 0, 'numPatients': 0 };
         var _genesetToolInfo = { 'numGenes': 0, 'numSymbols': 0 };
+        var _showGenesetImport = false;
      //   var _genesetDatasetInfo = { 'numGenes': 0, 'numSymbols': 0, 'url': '', 'desc':''  };
 
         var getTools = function() { return _tools; };
@@ -445,6 +447,7 @@
         var getCohortDatasetInfo = function() { return _cohortDatasetInfo; };
         var getGenesets = function() { return _genesets; };
         var getGeneset = function() { return _geneset; };
+        var getGenesetAll = function() { return _genesetAll; };
         var getGenesetToolInfo = function() { return _genesetToolInfo; };
     //    var getGenesetDatasetInfo = function() { return _genesetDatasetInfo; };
         var getData = function() { return _data; };
@@ -601,6 +604,10 @@
                     resolveDataSource();
                 });
             });
+        };
+        var showGenesetImport = function(showpanel) {
+            _showGenesetImport= showpanel;
+            onshowGenesetImportChange.dispatch(showpanel);
         };
 
         var createWithSampleIds = function(name, sampleIds, data) {
@@ -936,10 +943,13 @@
             // Geneset Management
             getGenesets: getGenesets,
             getGeneset: getGeneset,
+            getGenesetAll: getGenesetAll,
             setGeneset: setGeneset,
             saveGeneset: saveGeneset,
             deleteGeneset: deleteGeneset,
             toggleGenesetDisable: toggleGenesetDisable,
+            showGenesetImport: showGenesetImport,
+            
 
             // Signals
             onPatientColorChange: onPatientColorChange,
@@ -952,6 +962,7 @@
             onCohortsChange: onCohortsChange,
             onGenesetChange: onGenesetChange,
             onGenesetsChange: onGenesetsChange,
+            onshowGenesetImportChange: onshowGenesetImportChange,
 
             // Random
             setBusy: setBusy,
